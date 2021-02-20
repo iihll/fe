@@ -1,8 +1,32 @@
-function* generatorFn() {
-  yield
+class Counter {
+  constructor(limit) {
+    this.limit = limit
+  }
+
+  [Symbol.iterator]() {
+    let count = 1,
+        limit = this.limit
+    return {
+      next() {
+        if(count <= limit) {
+          return { done: false, value: count++}
+        } else {
+          return { done: true }
+        }
+      },
+      return() {
+        console.log('Exiting early')
+        return { done: true }
+      }
+    }
+  }
 }
 
-let generatorObject = generatorFn()
+let counter = new Counter(3)
 
-console.log(generatorObject.next())
-console.log(generatorObject.next())
+for (const i of counter) {
+  if(i > 2) {
+    break
+  }
+  console.log(i)
+}

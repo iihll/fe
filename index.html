@@ -1,17 +1,200 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
-  <h1>test</h1>
-  <h2>test</h2>
-  <h3>test</h3>
-  <h4>test</h4>
-  <h5>test</h5>
-</body>
-</html>
+<script>
+  function log(...args) {
+    console.log(...args)
+  }
+
+  // test <====>
+
+  /* 
+    原型链继承
+
+    缺点： 
+      1. 引用类型属性被所有实例共享
+      2. 创建 Child 的实例时， 无法向 Parent 传参
+  */
+  // function Parent(name) {
+  //   this.name = name
+  //   this.colors = ['red', 'blue']
+  // }
+
+  // function Child() {}
+
+  // Child.prototype = new Parent()
+
+  // var child = new Child('name')
+  // var child1 = new Child('name1')
+
+  // child.colors.push('green')
+  // log('child.colors', child.colors, 'child1.colors', child1.colors)
+  // log('child.name', child.name)
+
+  /* 
+    盗用构造函数
+
+    缺点：
+      1. 方法都在构造函数内定义， 每次创建实例都会创建一遍方法
+         即构造函数模式创建对象的缺点
+  */
+  // function Parent(name) {
+  //   this.name = name
+  //   this.sayName = new Function('log(this.name)')
+  // }
+
+  // function Child(name) {
+  //   // 关键代码
+  //   Parent.call(this, name)
+  // }
+
+  // var child1 = new Child('child1')
+  // var child2 = new Child('child2')
+
+  // log(child1.sayName === child2.sayName)
+
+  /* 
+    组合继承
+
+    缺点：
+      1. 会调用两次父构造函数
+  */
+  // function Parent(name) {
+  //   this.name = name
+  //   this.colors = ['red', 'blue']
+  // }
+  // Parent.prototype.getName = function() {
+  //   log(this.name)
+  // }
+
+  // function Child(name, age) {
+  //   Parent.call(this, name)
+  //   this.age = age
+  // }
+
+  // Child.prototype = new Parent()
+  // Child.prototype.constructor = Child
+
+  // var child1 = new Child('child1', 12)
+  // var child2 = new Child('child2', 21)
+  // child1.colors.push('green')
+  // log(child1, child2)
+  // log(child1.getName === child2.getName)
+
+  /* 
+    原型式继承 => 即 Object.create 的模拟实现(一个参数)
+
+    缺点： 
+      1. 引用类型属性被所有实例共享
+
+    注：
+      1. 修改父构造函数基本类型时，修改值时会在实例本身添加该值覆盖
+  */
+  // function createObj(o) {
+  //   function F() {}
+  //   F.prototype = o
+  //   return new F()
+  // }
+
+  // var person = {
+  //   name: 'person',
+  //   colors: ['red', 'blue']
+  // }
+
+  // var person1 = createObj(person)
+  // var person2 = createObj(person)
+  // var person3 = Object.create(person)
+
+  // person1.colors.push('green')
+  // log('person2.colors', person2.colors)
+  // log('person3.colors', person3.colors)
+
+  /* 
+    寄生式继承
+  */
+  // function createObj(o) {
+  //   var clone = Object.create(o)
+  //   clone.sayName = function() {
+  //     log('hi')
+  //   }
+  //   return clone
+  // }
+
+  /* 
+    寄生组合式继承
+  */
+  // function Parent(name) {
+  //   this.name = name
+  //   this.colors = ['red', 'blue']
+  // }
+  // Parent.prototype.getName = function() {
+  //   log(this.name)
+  // }
+
+  // function Child(name, age) {
+  //   Parent.call(this, name)
+  //   this.age = age
+  // }
+
+  // function object(o) {
+  //   function F() {}
+  //   F.prototype = o
+  //   return new F()
+  // }
+
+  // function prototype(child, parent) {
+  //   var prototype = object(parent.prototype)
+  //   prototype.constructor = child
+  //   child.prototype = prototype
+  // }
+
+  // prototype(Child, Parent)
+
+  // var child = new Child('child', 18)
+
+  /* 
+    ES6 class extends
+  */
+  // class Parent {
+  //   constructor(name) {
+  //     this.name = name
+  //     this.colors = ['red', 'blue']
+  //   }
+
+  //   getName() {
+  //     log(this.name)
+  //   }
+  // }
+
+  // class Child extends Parent {
+  //   constructor(name, age) {
+  //     super(name)
+  //     this.age = age
+  //   }
+  // }
+
+  // var child = new Child('name', 19)
+  // var child1 = new Child('child1', 20)
+
+  /* 
+    作用域
+  */
+  // var scope = 'global scope'
+  // function checkScope() {
+  //   var scope1 = 'local scope'
+  //   return scope1
+  // }
+
+  // checkScope()
+
+  /* 
+    闭包
+  */
+  var scope = 'global scope'
+  function checkScope() {
+    var scope = 'local scope'
+    function f() {
+      return scope
+    }
+    return f
+  }
+
+  var foo = checkScope()
+</script>
