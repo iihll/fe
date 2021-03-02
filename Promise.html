@@ -1,0 +1,30 @@
+<script>
+  Function.prototype.call = function(context) {
+    const ctx = context || window
+    ctx.func = this
+    const args = Array.from(arguments).slice(1)
+    const res = arguments.length > 1 ? ctx.func(...args) : ctx.func()
+
+    delete ctx.func
+
+    return res
+  }
+  Function.prototype.apply = function(context) {
+    const ctx = context || window
+    ctx.func = this
+    const args = Array.from(arguments).slice(1)
+    const res = arguments.length > 1 ? ctx.func(args) : ctx.func()
+
+    delete ctx.func
+    return res
+  }
+  Function.prototype.myCall = function(context) {
+    const ctx = context || window
+    ctx.func = this
+    const args = Array.from(arguments).slice(1)
+    const res = arguments.length > 1 ? ctx.func(...args) : ctx.func()
+
+    delete ctx.func
+    return res
+  }
+</script>

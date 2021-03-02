@@ -1,0 +1,3 @@
+class Compile {
+  constructor(vm) {}
+}

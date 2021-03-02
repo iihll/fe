@@ -1,0 +1,12 @@
+{
+  "name": "fe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/iihll/fe.git",
+  "author": "iihll",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "vue": "^2.6.12"
+  }
+}
