@@ -1,3 +1,5 @@
 class Compile {
-  constructor(vm) {}
+  constructor(vm) {
+    console.log(vm)
+  }
 }

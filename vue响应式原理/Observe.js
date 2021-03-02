@@ -1,3 +1,5 @@
 class Observe {
-  constructor(vm) {}
+  constructor(vm) {
+    console.log(vm.$data())
+  }
 }
