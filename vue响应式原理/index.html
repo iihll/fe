@@ -7,18 +7,25 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="app">{{ msg }}</div>
-  <!-- <script src="./vue.min.js"></script> -->
-  <script src="./Observe.js"></script>
+  <div id="app">
+    <div>
+      <span>{{ msg }}</span>
+      <p>{{ msg }}</p>
+    </div>
+    <span v-show="show">show</span>
+  </div>
+
+
+  <script src="./Observer.js"></script>
+  <script src="./Updater.js"></script>
   <script src="./Compile.js"></script>
-  <script src="./vue.js"></script>
+  <script src="./Vue.js"></script>
   <script>
-    new Vue({
+    const vm = new Vue({
       el: '#app',
-      data() {
-        return {
-          msg: 'Hello'
-        }
+      data: {
+        msg: 'Hello',
+        show: true
       }
     })
   </script>
