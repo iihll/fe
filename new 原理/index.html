@@ -9,10 +9,99 @@
 
   function Person(name) {
     this.name = name
+    this.list = []
     this.sayName = function() {
       console.log(this.name)
     }
   }
 
+  function Sub(name) {
+    Person.call(this, name)
+  }
+  Sub.prototype = new Person('asd')
+  let a = new Sub('阿萨德')
+  let b = new Sub('qwe')
+  
+
+
+
   const person = _new(Person, 'test')
+
+  var a = {}
+  var b = { key: 'b' }
+  var c = { key: 'c' }
+  a[b] = 123
+  a[c] = 456
+  console.log(a[b]);
+</script>
+
+
+
+<style>
+  input::placeholder {
+    color: red
+  }
+  li::marker {
+    color: red;
+  }
+</style>
+
+<body>
+  <div></div>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <input type="text" placeholder="吕超">
+</body>
+
+<script>
+  function iOf(left, right) {
+    while(true) {
+      if(left.__proto__ === right.prototype) {
+        return true
+      }
+      left = left?.__proto__
+    }
+
+    return false
+  }
+
+  function copy(source) {
+    var target = {}
+    for(let i in source) {
+      if(Object.prototype.toString.call(source[i]) === '[object Object]') {
+        target[i] = arguments.callee(source[i])
+      } else {
+        target[i] = source[i]
+      }
+    }
+    return target
+  }
+
+  function deepCopy(obj) {
+    let res = null
+    if (Array.isArray(obj)) {
+        res = []
+        for (let i of obj) {
+            res.push(i)
+        }
+        return res
+    }
+    res = {}
+    if (typeof obj == 'object') {
+        for (let i of Object.keys(obj)) {
+            if (Array.isArray(obj[i])) {
+                res[i] = arguments.callee(obj[i])
+            } else if (typeof obj[i] == 'object') {
+                res[i] = arguments.callee(obj[i])
+            } else {
+                res[i] = obj[i]
+            }
+        }
+    }
+    return res
+    document.querySelector('body')
+}
 </script>

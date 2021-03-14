@@ -16,3 +16,11 @@ let Obj = function(name, age) {
 const obj = myNew(Obj, 'test', 12)
 
 console.log(obj.get())
+
+
+function test() {
+  let o = {}
+  o.name = 1
+  return o
+}
+

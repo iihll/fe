@@ -1,0 +1,17 @@
+<script>
+  Function.prototype.bind = function (ctx, ...args) {
+    if(typeof this !== 'function') {
+      throw new Error("Function.prototype.bind - what is trying to be bound is not callable");
+    }
+
+    var that = this
+    var fNOP = function() {}
+    var fBound = function(...rest) {
+      return that.apply(this instanceof fNOP ? this : ctx, args.concat(rest))
+    }
+    fNOP.prototype = this.prototype
+    fBound.prototype = new fNOP()
+    return fBound
+  }
+
+</script>
