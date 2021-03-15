@@ -1,0 +1,20 @@
+<script>
+  Function.prototype.apply = function(ctx = window, args) {
+    ctx.fn = this
+    var result = ctx.fn(...args)
+    delete ctx.fn
+    return result
+  }
+  Function.prototype.call = function(ctx = window, ...args) {
+    ctx.fn = this
+    var result = ctx.fn(...args)
+    delete ctx.fn
+    return result
+  }
+  Function.prototype.bind = function(ctx = window, ...args) {
+    ctx.fn = this
+    let fnCopy = ctx.fn
+    delete ctx.fn
+    return fnCopy
+  }
+</script>

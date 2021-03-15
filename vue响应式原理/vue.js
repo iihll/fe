@@ -1,10 +1,11 @@
 class Vue {
   constructor(options) {
-    this.$data = options.data
     this.$options = options
+    this.$data = options.data
+    this.$el = options.el
 
-    new Observe(this)
+    new Observer(this, this.$data)
 
-    new Compile(this)
+    new Compile(this, this.$el)
   }
 }
