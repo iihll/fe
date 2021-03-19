@@ -1,0 +1,60 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-03-04 15:03:10
+ * @LastEditTime: 2021-03-04 16:05:12
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \fe\动画.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #status {
+      height: 50px;
+      width: 300px;
+      background-color: pink;
+    }
+  </style>
+</head>
+<body>
+  <div id="status"></div>
+
+  <canvas id="drawing" width="200" height="200">A drawing of something.</canvas>
+
+  <script>
+    let drawing = document.getElementById("drawing")
+    if(drawing.getContext) {
+      let context = drawing.getContext('2d')
+      context.strokeStyle = 'red'
+      context.strokeRect(60, 60, 50, 50)
+      context.fillStyle = '#ff4e21'
+      context.fillRect(10, 10, 50, 50)
+      context.fillStyle = 'rgba(0, 0, 255, 0.5)'
+      context.fillRect(30, 30, 50, 50)
+    }
+
+    const div = document.getElementById('status')
+    let start
+
+    function step(timestamp) {
+      if(start === undefined) {
+        start = timestamp
+      }
+      const elapsed = timestamp - start
+
+      div.style.transform = 'translateX(' + Math.min(0.1 * elapsed, 200) + 'px)'
+
+      if(elapsed < 3000) {
+        requestAnimationFrame(step)
+      }
+    }
+
+    requestAnimationFrame(step)
+  </script>
+</body>
+</html>
