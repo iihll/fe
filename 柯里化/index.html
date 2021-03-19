@@ -1,0 +1,14 @@
+<script>
+  var curry = function(fn, ...args) {
+    return function(...rest) {
+      var newArgs = args.concat(rest)
+      return fn.apply(this, newArgs)
+    }
+  }
+  var add = function(a, b, c) {
+    return a + b + c
+  }
+
+  var add1 = a => b => c => `${a}://${b}:${c}`
+  
+</script>
