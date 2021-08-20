@@ -13,6 +13,7 @@
       <p>{{ msg }}</p>
     </div>
     <span v-show="show">show</span>
+    <p v-text="text"></p>
   </div>
 
 
@@ -25,7 +26,8 @@
       el: '#app',
       data: {
         msg: 'Hello',
-        show: true
+        show: true,
+        text: 'iihll'
       }
     })
   </script>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Promise {
+        constructor(executor) {
+          this.initValue()
+          try {
+            executor(this.resolve, this.reject)
+          } catch (error) {
+            this.reject(error)
+          }
+        }
+
+        initValue() {
+          this.promiseState = 'pending'
+          this.promiseResult = null
+          this.onFulfilledCallbacks = []
+          this.onRejectedCallbacks = []
+        }
+
+        resolve = value => {
+          if (this.promiseState !== 'pending') return
+          this.promiseState = 'fulfilled'
+          this.promiseResult = value
+        }
+
+        reject = reason => {
+          if (this.promiseState !== 'pending') return
+          this.promiseState = 'rejected'
+          this.promiseResult = reason
+        }
+
+        then = (onFulfilled = () => {}, onRejected = () => {}) => {
+          if (this.promiseState === 'fulfilled') {
+            onFulfilled(this.promiseResult)
+          }
+          if (this.promiseState === 'rejected') {
+            onRejected(this.promiseResult)
+          }
+        }
+      }
+
+      let p1 = new Promise((resolve, reject) => {
+        resolve('success')
+        reject('fail')
+      })
+    </script>
+  </body>
+</html>
